@@ -327,6 +327,7 @@ class QuestionnaireForm extends Component {
                 />
               </div>
             </li>
+
             <li>
               <div className="mt-4">
                 <div className="form-group row">
