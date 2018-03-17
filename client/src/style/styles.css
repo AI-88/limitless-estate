@@ -1,23 +1,16 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
 html {
   height: 100%;
   font-size: 100%;
 }
 body {
-  font-family: "Roboto", sans-serif;
   font-size: 100%;
   line-height: 1.25;
 }
 
-.md-form label.active {
-  font-size: 1em;
-}
-.md-form label {
-  color: #212121;
-  font-size: 1em;
-}
 p {
-  font-size: 1rem;
+  font-family: "Open Sans";
+  font-size: 1em;
 }
 
 input[type="radio"] {

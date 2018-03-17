@@ -9,7 +9,14 @@ const style = {
 }
 class QuestionnaireForm extends Component {
   render() {
-    const { values, errors, touched, isSubmitting, handleChange, handleBlur } = this.props;
+    const {
+      values,
+      errors,
+      touched,
+      isSubmitting,
+      handleChange,
+      handleBlur
+    } = this.props;
     return (
       <div  className="d-flex flex-column align-items-start justify-content-around m-4">
              <p className="font-italic text-center card-text pt-1 mb-4">Please fill out the questions below to let us know more about you!</p>
@@ -21,6 +28,12 @@ class QuestionnaireForm extends Component {
               errors.firstname && <small className="ml-2 font-italic text-danger">{errors.firstname}</small>}
             <div className="form-group">
               <Field className="form-control" type="text" name="firstname" />
+              {touched.firstname &&
+                errors.firstname && (
+                  <small className="ml-2 font-italic text-danger">
+                    {errors.firstname}
+                  </small>
+                )}
             </div>
 
 
@@ -29,10 +42,17 @@ class QuestionnaireForm extends Component {
               errors.lastname && <small className="font-italic text-danger">{errors.lastname}</small>}
             <div className="form-group">
               <Field className="form-control" type="text" name="lastname" />
+              {touched.lastname &&
+                errors.lastname && (
+                  <small className="font-italic form-text text-danger">
+                    {errors.lastname}
+                  </small>
+                )}
             </div>
 
 
             <label htmlFor="email">Email Address</label>
+            <Field className="form-control" type="email" name="email" />
             {touched.email &&
               errors.email && <small className="font-bold font-italic text-danger">{errors.email}</small>}
             <div className="form-group">
@@ -46,10 +66,14 @@ class QuestionnaireForm extends Component {
                 <Field className="form-control" type="text" name="question1" />
               </div>
             </div>
-            <div className="mb-4">
-              <label htmlFor="lastname">2. What is the biggest hurdle you are trying to overcome by investing in Real Estate?
-              </label>
-              <div className="form-group">
+          </div>
+          <div className="mb-4">
+            <div className="form-group row">
+              <div className="col">
+                <label htmlFor="lastname">
+                  2. What is the biggest hurdle you are trying to overcome by
+                  investing in Real Estate?
+                </label>
                 <Field className="form-control" type="text" name="question2" />
               </div>
             </div>
@@ -80,35 +104,49 @@ class QuestionnaireForm extends Component {
                 </label>
               </div>
             </div>
-            <div className="mb-4">
-              <label>4. What are your return expectations?</label>
+          </div>
+        </div>
+        <div>
+          <div className="mb-4 d-flex flex-column align-items-middle form-group">
+            <label>4. What are your return expectations?</label>
+            <div className="container d-flex flex-column">
               <div className="form-group">
-                <ul className="list-group">
-                  <li className="list-group-item">
-                    <label htmlFor="question4a">Annual return (%)?</label>
-                    <Field className="form-control" type="text" name="question4a" />
-                  </li>
-                  <li className="list-group-item">
-                    <label htmlFor="question4b">Internal rate of return (IRR) (%)?</label>
-                    <Field className="form-control" type="text" name="question4b" />
-                  </li>
-                  <li className="list-group-item">
-                    <label htmlFor="question4c">Cash on cash return (%)?</label>
-                    <Field className="form-control" type="text" name="question4c" />
-                  </li>
-                </ul>
+                <label htmlFor="q4a">a. Annual Return Percentage:</label>
+                <div className="form-row">
+                  <div className="input-group-inline p-0">
+                    <Field
+                      className="ml-2 col-4 form-control input-group-text text-center"
+                      type="text"
+                      name="q4a"
+                    />
+                    <div className="input-group-append">%</div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div className="mb-4">
-              <label htmlFor="question5">5. What is your investment minimum and maximum hold time?</label>
-              <div className="form-group">
-                <Field className="form-control" type="text" name="question5" />
+              <div className="form-row">
+                <label htmlFor="q4b">b. Internal rate of return (IRR): </label>
+                <div className="input-group m-0">
+                  <Field
+                    className="ml-2 pl-2 col-4 form-control input-group-text text-center"
+                    type="text"
+                    name="q4b"
+                  />
+                  <div className="input-group-prepend p-0">%</div>
+                </div>
               </div>
-            </div>
-            <div className="mb-4">
-              <label htmlFor="question6">6. What is the minimum dollar amount you are willing to invest?</label>
-              <div className="form-group">
-                <Field className="form-control" type="text" name="question6" />
+
+              <div className="form-row">
+                <div className="form-inline">
+                  <label htmlFor="q4c">c. cash on cash return: </label>
+                  <div className="input-group">
+                    <Field
+                      className="col-4 ml-2 text-center form-control"
+                      type="text"
+                      name="q4c"
+                    />
+                    <div className="input-group-prepend">%</div>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -139,8 +177,8 @@ class QuestionnaireForm extends Component {
                     onBlur={handleBlur}
 
                   />
-                  No
-                </label>
+                  <div className="h5 m-0 input-group-prepend">days</div>
+                </div>
               </div>
             </div>
             <div className="mb-4">
@@ -213,8 +251,35 @@ class QuestionnaireForm extends Component {
                 </label>
               </div>
             </div>
-            <div className="mb-4">
-              <label htmlFor="question10">10. If you are out of the country, have you invested in the US real estate market in the past?
+          </div>
+        </div>
+        <div className="mb-4">
+          <div className="form-group">
+            <label htmlFor="question8">
+              8. <span className="ml-2">Can you show proof of funds?</span>
+            </label>
+            <div className="ml-2 mt-2 input-form-group">
+              <label>
+                <input
+                  className="lead mr-1"
+                  name="question8"
+                  type="radio"
+                  value="Yes"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                Yes
+              </label>
+              <label>
+                <input
+                  className="lead mr-1"
+                  name="question8"
+                  type="radio"
+                  value="No"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+                No
               </label>
               <div className="form-group">
                 <label>
@@ -302,17 +367,35 @@ class QuestionnaireForm extends Component {
                 </label>
               </div>
             </div>
-            <div className="mb-4">
-              <label htmlFor="question13">13. In a short paragraph please provide us with your investing experience.</label>
-              <div className="form-group">
-                <Field className="form-control" type="text" name="question13" component="textarea" />
-              </div>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <div className="form-group row">
+            <div className="col">
+              <label htmlFor="q11">
+                11. Have you invested as a limited partner (LP) on a syndication
+                deal in the past?
+              </label>
+              <Field className="form-control" type="text" name="q11" />
             </div>
-            <div className="mb-4">
-              <label htmlFor="question14">14. Is there anything else we should know about you and your investment goals?</label>
-              <div className="form-group">
-                <Field className="form-control" type="text" name="question14" component="textarea"/>
-              </div>
+          </div>
+        </div>
+
+        <div className="mb-4">
+          <div className="form-group row">
+            <div className="col">
+              <label htmlFor="q12">
+                12. Are you comfortable investing with other LPs or would you
+                require to be the only LP in this investment?
+              </label>
+              <small className="form-text text-muted">
+                If you’re a substantial portion of the equity being invested in
+                the deal, we would ask for you to commit non-refundable equity
+                to create an alignment of interest to close.
+              </small>
+
+              <Field className="form-control" type="text" name="q12" />
             </div>
         
 
@@ -328,12 +411,52 @@ class QuestionnaireForm extends Component {
 }
 
 export default withFormik({
-  mapPropsToValues({ firstname = '', lastname = '', email= '', question1 = '' , question2 = '', question3 = '', question4a = '', question4b = '', question4c = '', question5 = '', question6 = '', question7 = '', question8 = '', question9 = '', question10 = '', question11 = '', question12 = '', question13 = '', question14 = '' }) {
-    return { firstname, lastname, email, question1, question2, question3, question4a, question4b, question4c, question5, question6, question7, question8, question9, question10, question11, question12, question13, question14 };
+  mapPropsToValues({
+    firstname = "",
+    lastname = "",
+    email = "",
+    question1 = "",
+    question2 = "",
+    question3 = "",
+    question4a = "",
+    question4b = "",
+    question4c = "",
+    question5 = "",
+    question6 = "",
+    question7 = "",
+    question8 = "",
+    question9 = "",
+    question10 = "",
+    question11 = "",
+    question12 = "",
+    question13 = "",
+    question14 = ""
+  }) {
+    return {
+      firstname,
+      lastname,
+      email,
+      question1,
+      question2,
+      question3,
+      question4a,
+      question4b,
+      question4c,
+      question5,
+      question6,
+      question7,
+      question8,
+      question9,
+      question10,
+      question11,
+      question12,
+      question13,
+      question14
+    };
   },
   validationSchema: Yup.object().shape({
-    firstname: Yup.string().required('Field is required'),
-    lastname: Yup.string().required('Field is required'),
+    firstname: Yup.string().required("Field is required"),
+    lastname: Yup.string().required("Field is required"),
     email: Yup.string()
       .email('Email is not valid')
       .required('Field is required'),
